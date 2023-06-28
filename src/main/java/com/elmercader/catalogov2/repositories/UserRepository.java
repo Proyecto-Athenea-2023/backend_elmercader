@@ -12,7 +12,7 @@ public interface UserRepository extends MongoRepository<User, Integer> {
     Optional<User> getUserById(Integer id);
 
     @Query("{email: ?0}")
-    Optional<User> getUserByEmail(String email);
+    Optional<User> findUserByEmail(String email);
 
     @Query("{zone: ?0}")
     List<User> getUserByZone(String zone);

@@ -31,30 +31,31 @@ public class UserServices {
         return userRepository.getUserById(id);
     }
 
-    public Optional<User> getUserByEmail(String email) {
+    public Boolean getUserByEmail(String email) {
         if(Utilities.validateEmail(email))
-            return userRepository.getUserByEmail(email);
+            return userRepository.findUserByEmail(email).isPresent()? true: false;
         else
             // TODO add a nice exception
-            return null;
+            return false;
     }
 
     public Optional<User> validateUserLogin(String email, String password){
-        if(Utilities.validateEmail(email))
-            if(password.length() >= 6)
+        if(Utilities.validateEmail(email)) {
+            if (password.length() >= 6)
                 return userRepository.validateLogin(email, password);
             else
                 return null;
+        }
         else
             return null;
     }
 
     public User insertUser(User user){
         if(Utilities.validateEmail(user.getEmail())){
-            Optional<User> temp = userRepository.getUserByEmail(user.getEmail());
+            Optional<User> temp = userRepository.findUserByEmail(user.getEmail());
             if(temp.isEmpty()) {
-                user.setType( user.getType().toLowerCase() );
-                user.setZone( user.getZone().toLowerCase() );
+                user.setType( user.getType().toUpperCase() );
+                user.setZone( user.getZone().toUpperCase() );
                 return userRepository.save(user);
             }
             else

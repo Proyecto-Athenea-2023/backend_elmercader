@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/emailexist/{email}")
-    public Optional<User> getUserByEmail(@PathVariable("email") String email){
+    public Boolean getUserByEmail(@PathVariable("email") String email){
         return userServices.getUserByEmail(email);
     }
 
