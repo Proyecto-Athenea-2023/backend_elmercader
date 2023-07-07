@@ -26,5 +26,14 @@ public class Utilities {
         String emailPattern = "[a-z][a-z.]*@(usa.edu.co|gmail.com)";
         return validateRegex(emailPattern, email);
     }
+
+    /**
+     *
+     * @param word
+     * @return
+     */
+    public static String toCapitalize(String word){
+        return word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase();
+    }
 }
 
