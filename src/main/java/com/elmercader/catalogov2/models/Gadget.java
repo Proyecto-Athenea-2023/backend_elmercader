@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Gadget {
     @Id
     private Integer id;
-    private Integer code;
     private String brand;
     private String category;
     private String name;
