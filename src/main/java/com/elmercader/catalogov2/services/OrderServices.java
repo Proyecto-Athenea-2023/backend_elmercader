@@ -32,6 +32,10 @@ public class OrderServices {
         return orderRepository.getOrderByStatus(Utilities.toCapitalize(status));
     }
 
+    public List<Order> getOrdersByStatusBySalesman(String status, Integer salesmanId){
+        return orderRepository.findByStatusAndBySalesManId(status, salesmanId);
+    }
+
     /**
      *
      * @param zone
@@ -68,6 +72,7 @@ public class OrderServices {
         if(!order.getProducts().isEmpty()){
             if(order.getProducts().size() == order.getQuantities().size()){
                 order.setStatus("Pendiente");
+                // if date is not provided by the user, the system timestamp will be used
                 if(order.getRegisterDay().toString().length() == 0)
                     order.setRegisterDay(Date.from(Instant.now()));
 

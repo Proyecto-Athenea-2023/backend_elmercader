@@ -11,6 +11,9 @@ public interface OrderRepository extends MongoRepository<Order, Integer> {
     @Query("{status: ?0}")
     public List<Order> getOrderByStatus(String status);
 
+    // TODO test
+    public List<Order> findByStatusAndBySalesManId(String status, Integer salesmanId);
+
     public List<Order> findBySalesManZone(String zone);
 
     public List<Order> findBySalesManId(Integer salesmanId);
