@@ -32,8 +32,24 @@ public class OrderServices {
         return orderRepository.getOrderByStatus(Utilities.toCapitalize(status));
     }
 
+    /**
+     *
+     * @param status
+     * @param salesmanId
+     * @return
+     */
     public List<Order> getOrdersByStatusBySalesman(String status, Integer salesmanId){
-        return orderRepository.findByStatusAndBySalesManId(status, salesmanId);
+        return orderRepository.findByStatusAndSalesManId(status, salesmanId);
+    }
+
+    /**
+     *
+     * @param date
+     * @param salesmanId
+     * @return
+     */
+    public List<Order> getOrdersByDateBySalesman(String date, Integer salesmanId){
+       return orderRepository.findByDateAndSalesManId(date, salesmanId);
     }
 
     /**

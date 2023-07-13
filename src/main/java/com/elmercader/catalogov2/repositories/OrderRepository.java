@@ -9,15 +9,17 @@ import java.util.Optional;
 
 public interface OrderRepository extends MongoRepository<Order, Integer> {
     @Query("{status: ?0}")
-    public List<Order> getOrderByStatus(String status);
+    List<Order> getOrderByStatus(String status);
 
-    // TODO test
-    public List<Order> findByStatusAndBySalesManId(String status, Integer salesmanId);
+    List<Order> findByStatusAndSalesManId(String status, Integer salesmanId);
 
-    public List<Order> findBySalesManZone(String zone);
+    // TODO fix
+    List<Order> findByDateAndSalesManId(String date, Integer salesmanId);
 
-    public List<Order> findBySalesManId(Integer salesmanId);
+    List<Order> findBySalesManZone(String zone);
+
+    List<Order> findBySalesManId(Integer salesmanId);
 
     @Query("{id: ?0}")
-    public Optional<Order> getOrderById(Integer id);
+    Optional<Order> getOrderById(Integer id);
 }

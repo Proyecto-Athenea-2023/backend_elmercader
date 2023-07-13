@@ -29,6 +29,11 @@ public class OrderController {
         return orderServices.getOrdersByStatusBySalesman(status, salesmanId);
     }
 
+    @GetMapping("/date/{date}/{salesmanId}")
+    public List<Order> getOrdersByDateBySalesman(@PathVariable("date") String date, @PathVariable("salesmanId") Integer salesmanId){
+        return orderServices.getOrdersByDateBySalesman(String date, Integer salesmanId);
+    }
+
     @GetMapping("/zone/{zone}")
     public List<Order> getOrdersByZone(@PathVariable("zone") String zone) {
         return orderServices.getOrdersByZone(zone);
