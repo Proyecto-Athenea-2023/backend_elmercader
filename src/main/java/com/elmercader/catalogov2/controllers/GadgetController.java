@@ -29,6 +29,16 @@ public class GadgetController {
         return gadgetServices.getGadgetsByName(name);
     }
 
+    @GetMapping("/description/{keyword}")
+    public List<Gadget> getGadgetsByDescription(@PathVariable("keyword") String keyword){
+        return gadgetServices.getGadgetsByDescription(keyword);
+    }
+
+    @GetMapping("/price/{maxPrice}")
+    public List<Gadget> getGadgetsByMaxPrice(@PathVariable("maxPrice") Double maxPrice){
+        return gadgetServices.getGadgetsByMaxPrice(maxPrice);
+    }
+
     @GetMapping("/price/{minPrice}/{maxPrice}")
     public List<Gadget> getGadgetsByPriceRange(@PathVariable("minPrice") Double minPrice, @PathVariable("maxPrice") Double maxPrice){
         return gadgetServices.getGadgetsByPriceRange(minPrice, maxPrice);

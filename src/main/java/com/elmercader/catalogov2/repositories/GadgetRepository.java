@@ -17,6 +17,12 @@ public interface GadgetRepository extends MongoRepository<Gadget, Integer> {
     @Query("{name: {$regex: /?0/}}")
     List<Gadget> getGadgetByName(String name);
 
+    @Query("{description: {$regex: /?0/}}")
+    List<Gadget> getGadgetByDescription(String keyword);
+
+    @Query("{price: {$lte: ?0}}")
+    List<Gadget> getGadgetByMaxPrice(Double maxPrice);
+
     @Query("{price: {$gte:?0, $lte: ?1}}")
     List<Gadget> getGadgetByPrice(Double minPrice, Double maxPrice);
 

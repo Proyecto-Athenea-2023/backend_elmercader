@@ -13,18 +13,57 @@ public class GadgetServices {
     @Autowired
     private GadgetRepository gadgetRepository;
 
+    /**
+     *
+     * @return
+     */
     public List<Gadget> getAllGadgets() {
         return (List<Gadget>) gadgetRepository.findAll();
     }
 
+    /**
+     *
+     * @param category
+     * @return
+     */
     public List<Gadget> getGadgetsByCategory(String category){
         return gadgetRepository.getGadgetByCategory(category);
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     */
     public List<Gadget> getGadgetsByName(String name){
         return gadgetRepository.getGadgetByName(name);
     }
 
+    /**
+     *
+     * @param keyword
+     * @return
+     */
+    public List<Gadget> getGadgetsByDescription(String keyword){
+       return gadgetRepository.getGadgetByDescription(keyword.toLowerCase());
+    }
+
+
+    /**
+     *
+     * @param maxPrice
+     * @return
+     */
+    public List<Gadget> getGadgetsByMaxPrice(Double maxPrice){
+        return gadgetRepository.getGadgetByMaxPrice(maxPrice);
+    }
+
+    /**
+     *
+     * @param minPrice
+     * @param maxPrice
+     * @return
+     */
     public List<Gadget> getGadgetsByPriceRange(Double minPrice, Double maxPrice){
         if(maxPrice >= minPrice){
             return gadgetRepository.getGadgetByPrice(minPrice, maxPrice);
@@ -33,25 +72,45 @@ public class GadgetServices {
             return null;
     }
 
+    /**
+     *
+     * @param availability
+     * @return
+     */
     public List<Gadget> getGadgetsByAvailability(Boolean availability){
         return gadgetRepository.getGadgetByAvailability(availability);
     }
 
+    /**
+     *
+     * @param gadgetId
+     * @return
+     */
     public Optional<Gadget> getGadgetById(Integer gadgetId){
         return gadgetRepository.getGadgetById(gadgetId);
     }
 
+    /**
+     *
+     * @param gadget
+     * @return
+     */
     public Gadget insertGadget(Gadget gadget){
         Optional<Gadget> tempGadget = gadgetRepository.getGadgetById(gadget.getId());
         if(tempGadget.isPresent())
             return gadget;
-
+        gadget.setDescription( gadget.getDescription().toLowerCase() );
         if(gadget.getPrice() >= 0 && gadget.getQuantity() >= 0)
             return gadgetRepository.save(gadget);
         else
             return gadget;
     }
 
+    /**
+     *
+     * @param gadget
+     * @return
+     */
     public Gadget updateGadget(Gadget gadget){
         Optional<Gadget> tempGadget = gadgetRepository.getGadgetById(gadget.getId());
         if(tempGadget.isPresent()){
@@ -77,6 +136,10 @@ public class GadgetServices {
             return gadget;
     }
 
+    /**
+     *
+     * @param gadgetId
+     */
     public void deleteGadget(Integer gadgetId){
         Optional<Gadget> tempGadget = gadgetRepository.findById(gadgetId);
 
