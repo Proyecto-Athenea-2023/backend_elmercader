@@ -131,6 +131,10 @@ public class UserServices {
                 tempUser.get().setZone(user.getZone());
             if(user.getType() != null)
                 tempUser.get().setType(user.getType());
+            if(user.getBirthtDay() != null)
+                tempUser.get().setBirthtDay(user.getBirthtDay());
+            if(user.getMonthBirthtDay() != null)
+                tempUser.get().setMonthBirthtDay(user.getMonthBirthtDay());
             return userRepository.save(tempUser.get());
         }
         else
