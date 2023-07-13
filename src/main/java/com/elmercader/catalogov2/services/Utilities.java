@@ -35,5 +35,14 @@ public class Utilities {
     public static String toCapitalize(String word){
         return word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase();
     }
+
+    /**
+     *
+     * @param month
+     * @return
+     */
+    public static String checkMonthDigit(String month){
+        return (month.length() == 1) ? "0"+month : month;
+    }
 }
 
