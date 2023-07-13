@@ -13,24 +13,58 @@ public class UserServices {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     *
+     * @return
+     */
     public List<User> getAllUsers(){
         return (List<User>) userRepository.findAll();
     }
 
+    /**
+     *
+     * @param zone
+     * @return
+     */
     public List<User> getUsersByZone(String zone){
         String zoneL = zone.toLowerCase();
         return userRepository.getUserByZone(zoneL);
     }
 
+    /**
+     *
+     * @param type
+     * @return
+     */
     public List<User> getUsersByType(String type){
         String typeL = type.toLowerCase();
         return userRepository.getUserByType(typeL);
     }
 
+
+    /**
+     *
+     * @param month
+     * @return
+     */
+    public List<User> getUsersByMonthBirthday(String month) {
+        return userRepository.getUserByMonthBirthday(Utilities.checkMonthDigit(month));
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Optional<User> getUserById(Integer id){
         return userRepository.getUserById(id);
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     */
     public Boolean getUserByEmail(String email) {
         if(Utilities.validateEmail(email))
             return userRepository.findUserByEmail(email).isPresent()? true: false;
@@ -39,6 +73,12 @@ public class UserServices {
             return false;
     }
 
+    /**
+     *
+     * @param email
+     * @param password
+     * @return
+     */
     public Optional<User> validateUserLogin(String email, String password){
         if(Utilities.validateEmail(email)) {
             if (password.length() >= 6)
@@ -50,12 +90,18 @@ public class UserServices {
             return null;
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     public User insertUser(User user){
         if(Utilities.validateEmail(user.getEmail())){
             Optional<User> temp = userRepository.findUserByEmail(user.getEmail());
             if(temp.isEmpty()) {
                 user.setType( user.getType().toUpperCase() );
                 user.setZone( user.getZone().toUpperCase() );
+                user.setMonthBirthtDay( Utilities.checkMonthDigit(user.getMonthBirthtDay()) );
                 return userRepository.save(user);
             }
             else
@@ -65,6 +111,11 @@ public class UserServices {
         return user;
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     public User updateUser(User user){
         Optional<User> tempUser = userRepository.getUserById(user.getId());
         if(tempUser.isPresent()){
@@ -86,6 +137,10 @@ public class UserServices {
             return user;
     }
 
+    /**
+     *
+     * @param userId
+     */
     public void deleteUser(Integer userId){
         // TODO check if it is better to use getUserById
         Optional<User> tempUser = userRepository.findById(userId);

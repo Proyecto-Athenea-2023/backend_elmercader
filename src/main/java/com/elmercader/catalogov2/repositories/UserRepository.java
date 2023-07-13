@@ -20,6 +20,9 @@ public interface UserRepository extends MongoRepository<User, Integer> {
     @Query("{type: ?0}")
     List<User> getUserByType(String type);
 
+    @Query("{monthBirthtDay: ?0}")
+    List<User> getUserByMonthBirthday(String month);
+
     @Query("{$and: [{email: ?0}, {password: ?1}]}")
     Optional<User> validateLogin(String email, String password);
 }
