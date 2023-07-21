@@ -49,7 +49,7 @@ public class OrderServices {
      * @return
      */
     public List<Order> getOrdersByDateBySalesman(String date, Integer salesmanId){
-       return orderRepository.findByDateAndSalesManId(date, salesmanId);
+       return orderRepository.findByRegisterDayAndSalesManId(date, salesmanId);
     }
 
     /**

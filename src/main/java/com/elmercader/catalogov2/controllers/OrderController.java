@@ -31,7 +31,7 @@ public class OrderController {
 
     @GetMapping("/date/{date}/{salesmanId}")
     public List<Order> getOrdersByDateBySalesman(@PathVariable("date") String date, @PathVariable("salesmanId") Integer salesmanId){
-        return orderServices.getOrdersByDateBySalesman(String date, Integer salesmanId);
+        return orderServices.getOrdersByDateBySalesman(date, salesmanId);
     }
 
     @GetMapping("/zone/{zone}")
